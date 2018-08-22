@@ -3,17 +3,3 @@ Based on http://aosabook.org .
 and http://aosabook.org/en/500L/clustering-by-consensus.html by Dustin J. Mitchell
 
 
-
-
-                            Local  
-Requester    ---------     Replica                  Current  
-    *--->>---/ Invoke /--------+                      Leader  
-             ---------         :         ----------  
-                               *--->>---/ Propose /-----+  
-                                        ----------      :   
-                                                  (multi-paxos)  
-                                        -----------     :  
-                               +-------/ Decision /-<<--*  
-              ----------       :       -----------  
-    *--------/ Invoked /---<<--*  
-    :        ----------  
