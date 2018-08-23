@@ -3,8 +3,6 @@ from common import NULL_BALLOT, PREPARE_RETRANSMIT, ACCEPT_RETRANSMIT, LEADER_TI
 from message import Accepting, Promise, Accepted, Proposal, Propose, Invoked, Welcome, Prepare, Adopted, Preempted\
     , Accept, Decided, Ballot, Active, Join, Invoke
 import itertools
-import threading
-import queue
 
 
 class Role(object):
@@ -397,32 +395,89 @@ class Requester(Role):
         self.stop()
 
 
-class Member(object):
-    def __init__(self, state_machine, network, peers, seed=None, seed_cls=Seed, bootstrap_cls=Bootstrap):
-        self.network = network
-        self.node = network.new_node()
-        if seed is not None:
-            self.startup_role = seed_cls(self.node, initial_state=seed, peers=peers, execute_fn=state_machine)
-        else:
-            self.startup_role = bootstrap_cls(self.node, execute_fn=state_machine, peers=peers)
-        self.requester = None
-        self.thread = None
+# The replica creates new proposals in response to Invoke messages from clients,
+# selecting what it believes to be an unused slot and sending a Propose message to the current leader.
+# Furthermore, if the consensus for the selected slot is for a different proposal,
+# the replica must re-propose with a new slot.
+#
+#                             Local
+# Requester    ---------     Replica                  Current
+#     *--->>---/ Invoke /--------+                      Leader
+#              ---------         :         ----------
+#                                *--->>---/ Propose /-----+
+#                                         ----------      :
+#                                                   (multi-paxos)
+#                                         -----------     :
+#                                +-------/ Decision /-<<--*
+#               ----------       :       -----------
+#     *--------/ Invoked /---<<--*
+#     :        ----------
 
-    def start(self):
-        self.startup_role.start()
-        self.thread = threading.Thread(target=self.network.run)
-        self.thread.run()
+# When the leader role becomes active, it sends an Adopted message to the replica on the same node.
+# The replica creates new proposals in response to Invoke messages from clients,
+# selecting what it believes to be an unused slot and sending a Propose message to the current leader.
+# Furthermore, if the consensus for the selected slot is for a different proposal,
+# the replica must re-propose with a new slot.
+#
+#                             Local
+# Leader      ----------     Replica
+#   *--->>---/ Adopted /--------+
+#            ----------
 
-    def invoke(self, input_value, request_cls=Requester):
-        assert self.requester is None
-        q = queue.Queue()
-        self.requester = request_cls(self.node, input_value, q.put)
-        self.requester.start()
-        output = q.get()
-        self.requester = None
-        return output
+# When the acceptor role sends a Promise to a new leader, it sends an Accepting message to its local replica.
+#
+#                               Local
+# Acceptor     ------------    Replica
+#     *--->>--/ Accepting /-------+
+#             ------------
 
+# The active leader sends Active messages as a heartbeat.
+# If no such message arrives before the LEADER_TIMEOUT expires,
+# the replica assumes the leader is dead and moves on to the next leader.
+# In this case, it's important that all replicas choose the same new leader,
+# which we accomplish by sorting the members and selecting the next one in the list.
+#
+# Leader      ---------    Replica   Replica   Replica
+#    *--->>--/ Active /-------+---------+---------+
+#            ---------
 
+# Finally, when a node joins the network, the bootstrap role sends a Join message.
+# The replica responds with a Welcome message containing its most recent state,
+# allowing the new node to come up to speed quickly.
+#
+# Bootstrap   -------    Replica   Replica   Replica
+#     *-->>--/ Join /-------+---------+---------+
+#     :      -------        :         :         :
+#     :     ----------      :         :         :
+#     +----/ Welcome /--<<--*         :         :
+#          ----------                 :         :
+#                ----------           :         :
+#     +---------/ Welcome /----<<-----*         :
+#               ----------                      :
+#                     ----------                :
+#     +--------------/ Welcome /------<<--------*
+#                    ----------
+
+# The leader creates a scout role when it wants to become active,
+# in response to receiving a Propose when it is inactive.
+# The scout sends (and re-sends, if necessary) a Prepare message,
+# and collects Promise responses until it has heard from a majority of its peers or until it has been preempted.
+# It communicates the result back to the leader with an Adopted or Preempted message, respectively.
+#
+#                          Scout        ----------     Acceptor        Acceptor        Acceptor
+#                            *--->>----/ Prepare /--------+---------------+---------------+
+#                            :         ----------         :               :               :
+#                            :       ----------           :               :               :
+#                            +------/ Promise /----<<-----*               :               :
+#                            :      ----------                            :               :
+#                            :                  ----------                :               :
+#                            +-----------------/ Promise /-------<<-------*               :
+#                            :                 ----------                                 :
+#                            :                              ----------                    :
+#                            +-----------------------------/ Promise /---------<<---------*
+# Leader    ----------       :                             ----------
+#   +------/ Adopted /---<<--*
+#          ----------
 
 
 
