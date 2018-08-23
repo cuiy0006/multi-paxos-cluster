@@ -1,6 +1,10 @@
-from common import NULL_BALLOT, PREPARE_RETRANSMIT, ACCEPT_RETRANSMIT, LEADER_TIMEOUT
+from common import NULL_BALLOT, PREPARE_RETRANSMIT, ACCEPT_RETRANSMIT, LEADER_TIMEOUT, JOIN_RETRANSMIT, \
+    INVOKE_RETRANSMIT
 from message import Accepting, Promise, Accepted, Proposal, Propose, Invoked, Welcome, Prepare, Adopted, Preempted\
-    , Accept, Decided, Ballot, Active
+    , Accept, Decided, Ballot, Active, Join, Invoke
+import itertools
+import threading
+import queue
 
 
 class Role(object):
@@ -299,17 +303,124 @@ class Leader(Role):
             self.logger.info('got Propose for a slot already being Proposed')
 
 
+# when a node joins cluster, Bootstrap sends Join to Replicas, Replicas reply Welcome
+class Bootstrap(Role):
+    def __init__(self, node, peers, execute_fn,
+                 replica_cls=Replica,
+                 acceptor_cls=Replica,
+                 leader_cls=Leader,
+                 commander_cls=Commander,
+                 scout_cls=Scout):
+        super().__init__(node)
+        self.execute_fn = execute_fn
+        self.peers = peers
+        self.peers_cycle = itertools.cycle(peers)
+        self.replica_cls = replica_cls
+        self.acceptor_cls = acceptor_cls
+        self.leader_cls = leader_cls
+        self.commander_cls = commander_cls
+        self.scout_cls = scout_cls
+
+    def start(self):
+        self.join()
+
+    def join(self):
+        self.node.send([next(self.peers_cycle)], Join())
+        self.set_timer(JOIN_RETRANSMIT, self.join)
+
+    def do_Welcome(self, sender, state, slot, decisions):
+        self.acceptor_cls(self.node)
+        self.replica_cls(self.node, execute_fn=self.execute_fn, peers=self.peers,
+                         state=state, slot=slot, decisions=decisions)
+        self.leader_cls(self.node, peers=self.peers, commander_cls=self.commander_cls,
+                        scout_cls=self.scout_cls).start()
+        self.stop()
 
 
+class Seed(Role):
+    def __init__(self, node, initial_state, execute_fn, peers, bootstrap_cls=Bootstrap):
+        super().__init__(node)
+        self.initial_state = initial_state
+        self.execute_fn = execute_fn
+        self.peers = peers
+        self.bootstrap_cls = bootstrap_cls
+        self.seen_peers = set()
+        self.exit_timer = None
+
+    def do_Join(self, sender):
+        self.seen_peers.add(sender)
+        if len(self.seen_peers) <= len(self.peers) // 2:
+            return
+
+        # cluster is ready, welcome everyone
+        self.node.send(list(self.seen_peers), Welcome(
+            state=self.initial_state, slot=1, decisions={}
+        ))
+
+        # stick around for long enough that we don't hear any new Join from the newly formatted cluster
+        if self.exit_timer:
+            self.exit_timer.cancel()
+        self.exit_timer = self.set_timer(JOIN_RETRANSMIT * 2, self.finish)
+
+    def finish(self):
+        # add self to the cluster
+        bs = self.bootstrap_cls(node=self.node,
+                                peers=self.peers,
+                                execute_fn=self.execute_fn)
+        bs.start()
+        self.stop()
 
 
+class Requester(Role):
+    client_ids = itertools.count(start=100000)
+
+    def __init__(self, node, n, callback):
+        super().__init__(node)
+        self.client_id = next(self.client_ids)
+        self.n = n
+        self.output = None
+        self.callback = callback
+        self.invoke_timer = None
+
+    def start(self):
+        self.node.send([self.node.address], Invoke(
+            caller=self.node.address, client_id=self.client_id, input_value=self.n
+        ))
+        self.invoke_timer = self.set_timer(INVOKE_RETRANSMIT, self.start)
+
+    def do_Invoked(self, sender, client_id, output):
+        if client_id != self.client_id:
+            return
+        self.logger.debug("received output %r" % output)
+        self.invoke_timer.cancel()
+        self.callback(output)
+        self.stop()
 
 
+class Member(object):
+    def __init__(self, state_machine, network, peers, seed=None, seed_cls=Seed, bootstrap_cls=Bootstrap):
+        self.network = network
+        self.node = network.new_node()
+        if seed is not None:
+            self.startup_role = seed_cls(self.node, initial_state=seed, peers=peers, execute_fn=state_machine)
+        else:
+            self.startup_role = bootstrap_cls(self.node, execute_fn=state_machine, peers=peers)
+        self.requester = None
+        self.thread = None
 
+    def start(self):
+        self.startup_role.start()
+        self.thread = threading.Thread(target=self.network.run)
+        self.thread.run()
 
-
-
-
+    def invoke(self, input_value, request_cls=Requester):
+        assert self.requester is None
+        q = queue.Queue()
+        self.requester = request_cls(self.node, input_value, q.put)
+        self.requester.start()
+        output = q.get()
+        self.requester = None
+        return output
 
 
 
