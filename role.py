@@ -41,14 +41,15 @@ class Acceptor(Role):
 
     # come from commander, send back to commander
     def do_Accept(self, sender, ballot_num, slot, proposal):
-        if ballot_num > self.ballot_num:
+        if ballot_num >= self.ballot_num:
             self.ballot_num = ballot_num
             acc = self.accepted_proposals
             if slot not in acc or acc[slot][0] < ballot_num:
                 acc[slot] = (ballot_num, proposal)
 
         self.node.send([sender], Accepted(
-            slot=slot, ballot_num=ballot_num
+            slot=slot,
+            ballot_num=self.ballot_num
         ))
 
 
@@ -86,7 +87,10 @@ class Replica(Role):
         #  ourselves (which may trigger a scout to make us the leader)
         leader = self.latest_leader or self.node.address
         self.logger.info('proposing %s at slot %d to leader %s' % (proposal, slot, leader))
-        self.node.send([leader], Propose(slot=slot, proposal=proposal))
+        self.node.send([leader], Propose(
+            slot=slot,
+            proposal=proposal
+        ))
 
     #  come from leader, send to client
     def do_Decision(self, sender, slot, proposal):
@@ -121,7 +125,10 @@ class Replica(Role):
         if proposal.caller is not None:
             #  perform a client operation
             self.state, output = self.execute_fn(self.state, proposal.input)
-            self.node.send([proposal.caller], Invoked(client_id=proposal.client_id, output=output))
+            self.node.send([proposal.caller], Invoked(
+                client_id=proposal.client_id,
+                output=output
+            ))
 
     #  tracking the leader
 
@@ -151,7 +158,11 @@ class Replica(Role):
     #  adding new cluster members
     def do_Join(self, sender):
         if sender in self.peers:
-            self.node.send([sender], Welcome(state=self.state, slot=self.slot, decisions=self.decisions))
+            self.node.send([sender], Welcome(
+                state=self.state,
+                slot=self.slot,
+                decisions=self.decisions
+            ))
 
 
 # the leader create a scout role when it wants to become active, in response to receiving a Propose when it is inactive
@@ -188,8 +199,11 @@ class Scout(Role):
             self.acceptors.add(sender)
             if len(self.acceptors) >= self.quorum:
                 accepted_proposals = {s: p for s, (_, p) in self.accepted_proposals.items()}
+                # we are adopted, but this does not mean that no other leader is alive
+                # any such conflicts will be handled by commander
                 self.node.send([self.node.address], Adopted(ballot_num=ballot_num,
-                                                            accepted_proposals=accepted_proposals))
+                                                            accepted_proposals=accepted_proposals
+                                                            ))
                 self.stop()
         else:
             #  this acceptor has promised another leader a higher ballot number
@@ -277,14 +291,23 @@ class Leader(Role):
 
     def spawn_commander(self, ballot_num, slot):
         proposal = self.proposals[slot]
-        self.commander_cls(self.node, ballot_num=ballot_num, slot=slot, proposal=proposal, peers=self.peers).start()
+        self.commander_cls(
+            self.node,
+            ballot_num=ballot_num,
+            slot=slot,
+            proposal=proposal,
+            peers=self.peers
+        ).start()
 
     def do_Preempted(self, sender, slot, preempted_by):
         if not slot:  # from the scout
             self.scouting = False
         self.logger.info('leader preempted by %s', preempted_by.leader)
         self.active = False
-        self.ballot_num = Ballot((preempted_by or self.ballot_num).n + 1, self.ballot_num.leader)
+        self.ballot_num = Ballot(
+            (preempted_by or self.ballot_num).n + 1,
+            self.ballot_num.leader
+        )
 
     def do_Propose(self, sender, slot, proposal):
         if slot not in self.proposals:
@@ -295,8 +318,9 @@ class Leader(Role):
             else:
                 if not self.scouting:
                     self.logger.info('got Propose when not active')
+                    self.spawn_scout()
                 else:
-                    self.logger.info('got Propose when scouting')
+                    self.logger.info('got Propose when scouting; ignored')
         else:
             self.logger.info('got Propose for a slot already being Proposed')
 
@@ -328,15 +352,25 @@ class Bootstrap(Role):
 
     def do_Welcome(self, sender, state, slot, decisions):
         self.acceptor_cls(self.node)
-        self.replica_cls(self.node, execute_fn=self.execute_fn, peers=self.peers,
-                         state=state, slot=slot, decisions=decisions)
-        self.leader_cls(self.node, peers=self.peers, commander_cls=self.commander_cls,
-                        scout_cls=self.scout_cls).start()
+        self.replica_cls(
+            self.node,
+            execute_fn=self.execute_fn,
+            peers=self.peers,
+            state=state, slot=slot,
+            decisions=decisions
+        )
+        self.leader_cls(
+            self.node,
+            peers=self.peers,
+            commander_cls=self.commander_cls,
+            scout_cls=self.scout_cls
+        ).start()
         self.stop()
 
 
 class Seed(Role):
-    def __init__(self, node, initial_state, execute_fn, peers, bootstrap_cls=Bootstrap):
+    def __init__(self, node, initial_state, execute_fn,
+                 peers, bootstrap_cls=Bootstrap):
         super().__init__(node)
         self.initial_state = initial_state
         self.execute_fn = execute_fn
@@ -362,10 +396,10 @@ class Seed(Role):
 
     def finish(self):
         # add self to the cluster
-        bs = self.bootstrap_cls(node=self.node,
-                                peers=self.peers,
-                                execute_fn=self.execute_fn)
-        bs.start()
+        self.bootstrap_cls(node=self.node,
+                           peers=self.peers,
+                           execute_fn=self.execute_fn
+                           ).start()
         self.stop()
 
 
