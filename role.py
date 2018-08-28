@@ -1,4 +1,4 @@
-from common import NULL_BALLOT, PREPARE_RETRANSMIT, ACCEPT_RETRANSMIT, LEADER_TIMEOUT, JOIN_RETRANSMIT, \
+from common improt NULL_BALLOT, PREPARE_RETRANSMIT, ACCEPT_RETRANSMIT, LEADER_TIMEOUT, JOIN_RETRANSMIT, \
     INVOKE_RETRANSMIT
 from message import Accepting, Promise, Accepted, Proposal, Propose, Invoked, Welcome, Prepare, Adopted, Preempted\
     , Accept, Decided, Ballot, Active, Join, Invoke, Decision
