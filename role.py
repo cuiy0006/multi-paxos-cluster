@@ -13,7 +13,7 @@ class Role(object):
         self.logger = node.logger.getChild(type(self).__name__)
 
     def set_timer(self, seconds, callback):
-        return self.network.set_timer(self.node.address, seconds, lambda: self.running and callback())
+        return self.node.network.set_timer(self.node.address, seconds, lambda: self.running and callback())
 
     def stop(self):
         self.running = False
@@ -329,7 +329,7 @@ class Leader(Role):
 class Bootstrap(Role):
     def __init__(self, node, peers, execute_fn,
                  replica_cls=Replica,
-                 acceptor_cls=Replica,
+                 acceptor_cls=Acceptor,
                  leader_cls=Leader,
                  commander_cls=Commander,
                  scout_cls=Scout):
@@ -416,7 +416,9 @@ class Requester(Role):
 
     def start(self):
         self.node.send([self.node.address], Invoke(
-            caller=self.node.address, client_id=self.client_id, input_value=self.n
+            caller=self.node.address,
+            client_id=self.client_id,
+            input_value=self.n
         ))
         self.invoke_timer = self.set_timer(INVOKE_RETRANSMIT, self.start)
 

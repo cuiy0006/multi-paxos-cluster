@@ -46,10 +46,13 @@ class Network(object):
                 self.set_timer(sender.address, 0, lambda: sender.receive(sender.address, message))
             elif self.rnd.uniform(0, 1.0) > self.DROP_PROB:
                 delay = self.PROP_DELAY + self.rnd.uniform(-self.PROP_JITTER, self.PROP_JITTER)
-                self.set_timer(dest,
-                               delay,
-                               functools.partial(self.nodes[dest].receive, sender.address, message)
-                               )
+                self.set_timer(
+                    dest, delay, functools.partial(
+                        self.nodes[dest].receive,
+                        sender.address,
+                        message
+                    )
+                )
 
 
 class Timer(object):
