@@ -62,13 +62,19 @@ class Timer(object):
         self.callback = callback
         self.cancelled = False
 
-    def __cmp__(self, other):
-        if self.expires < other.expires:
-            return -1
-        elif self.expires == other.expires:
-            return 0
-        else:
-            return 1
+    # def __cmp__(self, other):
+    #     if self.expires < other.expires:
+    #         return -1
+    #     elif self.expires == other.expires:
+    #         return 0
+    #     else:
+    #         return 1
+
+    def __lt__(self, other):
+        return self.expires < other.expires
+
+    def __eq__(self, other):
+        return self.expires == other.expires
 
     def cancel(self):
         self.cancelled = True
