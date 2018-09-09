@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7225cec4-4bb0-4149-ba2e-87abbad8a58b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/test_seed.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/test_network.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/network.py" beforeDir="false" afterPath="$PROJECT_DIR$/network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_seed.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_seed.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,44 +16,58 @@
     <session id="725266879">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="24" />
+          <entry key="py" value="32" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="24" />
+          <entry key="Python" value="32" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="20103" />
+          <entry key="py" value="20816" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="20103" />
+          <entry key="Python" value="20816" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/fake_network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
-              <caret line="45" column="22" lean-forward="true" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
+            <state relative-caret-position="758">
+              <caret line="45" column="16" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="17" />
               <folding>
-                <element signature="e#1#22#0" expanded="true" />
                 <marker date="1535518781092" expanded="true" signature="1046:1051" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/network.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="901">
+              <caret line="41" column="31" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+                <marker date="1536516978926" expanded="true" signature="113:118" ph="..." />
+                <marker date="1536516978926" expanded="true" signature="2314:2365" ph="..." />
               </folding>
             </state>
           </provider>
@@ -63,25 +76,53 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="432">
+              <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
                 <marker date="1535575760853" expanded="true" signature="125:126" ph="..." />
+                <marker date="1535575760853" expanded="true" signature="429:434" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/test_network.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+                <marker date="1536477391004" expanded="true" signature="126:131" ph="..." />
+                <marker date="1536477391004" expanded="true" signature="277:278" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/test_seed.py">
+        <entry file="file://$PROJECT_DIR$/node.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="29" column="10" lean-forward="true" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
+            <state relative-caret-position="510">
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
               <folding>
-                <element signature="e#0#19#0" expanded="true" />
-                <marker date="1535579062880" expanded="true" signature="154:155" ph="..." />
-                <marker date="1535579062880" expanded="true" signature="154:160" ph="..." />
+                <element signature="e#0#16#0" expanded="true" />
+                <marker date="1534897311349" expanded="true" signature="103:108" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/role.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+              <folding>
+                <element signature="e#0#127#0" expanded="true" />
+                <marker date="1535507643204" expanded="true" signature="344:349" ph="..." />
+                <marker date="1535507643204" expanded="true" signature="880:885" ph="..." />
               </folding>
             </state>
           </provider>
@@ -119,21 +160,22 @@
         <option value="$PROJECT_DIR$/sim_time_logger.py" />
         <option value="$PROJECT_DIR$/message.py" />
         <option value="$PROJECT_DIR$/common.py" />
-        <option value="$PROJECT_DIR$/role.py" />
         <option value="$PROJECT_DIR$/member.py" />
-        <option value="$PROJECT_DIR$/node.py" />
         <option value="$PROJECT_DIR$/test/__init__.py" />
         <option value="$PROJECT_DIR$/test/fake_network.py" />
+        <option value="$PROJECT_DIR$/role.py" />
         <option value="$PROJECT_DIR$/test/utils.py" />
-        <option value="$PROJECT_DIR$/network.py" />
         <option value="$PROJECT_DIR$/test/test_seed.py" />
+        <option value="$PROJECT_DIR$/node.py" />
+        <option value="$PROJECT_DIR$/network.py" />
+        <option value="$PROJECT_DIR$/test/test_network.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
-    <option name="x" value="722" />
-    <option name="width" value="718" />
-    <option name="height" value="900" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="x" value="1440" />
+    <option name="width" value="1918" />
+    <option name="height" value="2160" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -161,7 +203,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="http.proxy" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -175,7 +217,35 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python tests.Unittests in test">
+    <configuration name="Unittests in test" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="multi-paxos-cluster" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests in test_network.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="multi-paxos-cluster" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/test_network.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="Unittests in test_seed.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="multi-paxos-cluster" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -190,8 +260,15 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python tests.Unittests in test_seed.py" />
+      <item itemvalue="Python tests.Unittests in test" />
+      <item itemvalue="Python tests.Unittests in test_network.py" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests in test" />
+        <item itemvalue="Python tests.Unittests in test_network.py" />
         <item itemvalue="Python tests.Unittests in test_seed.py" />
       </list>
     </recent_temporary>
@@ -210,35 +287,52 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_seed_py - 2018.08.29 at 17h 31m 51s.xml">
-      <configuration name="Unittests in test_seed.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_network_py - 2018.09.09 at 03h 14m 38s.xml">
+      <configuration name="Unittests in test_network.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_seed_py - 2018.08.29 at 17h 35m 21s.xml">
-      <configuration name="Unittests in test_seed.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_network_py - 2018.09.09 at 03h 14m 46s.xml">
+      <configuration name="Unittests in test_network.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_seed_py - 2018.08.29 at 17h 36m 40s.xml">
-      <configuration name="Unittests in test_seed.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_network_py - 2018.09.09 at 03h 14m 47s.xml">
+      <configuration name="Unittests in test_network.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_seed_py - 2018.08.29 at 17h 44m 27s.xml">
-      <configuration name="Unittests in test_seed.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_network_py - 2018.09.09 at 03h 15m 09s.xml">
+      <configuration name="Unittests in test_network.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_network_py - 2018.09.09 at 03h 15m 48s.xml">
+      <configuration name="Unittests in test_network.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_network_py - 2018.09.09 at 03h 15m 57s.xml">
+      <configuration name="Unittests in test_network.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_network_py - 2018.09.09 at 03h 16m 00s.xml">
+      <configuration name="Unittests in test_network.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_network_py - 2018.09.09 at 03h 16m 06s.xml">
+      <configuration name="Unittests in test_network.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_network_py - 2018.09.09 at 03h 16m 08s.xml">
+      <configuration name="Unittests in test_network.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test - 2018.09.09 at 14h 16m 28s.xml">
+      <configuration name="Unittests in test" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
-    <editor active="true" />
+    <frame x="1440" y="0" width="1918" height="2160" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.12755461" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12751323" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.10963856" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286408" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32961166" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.2684466" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32891566" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3286408" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32771084" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -268,6 +362,25 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>x</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>elif</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.rnd.uniform(0, 1.0)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sim_time_logger.py" />
     <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2018.2/python_stubs/-1199943127/builtins.py">
@@ -288,17 +401,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="1561" column="15" selection-start-line="1561" selection-start-column="15" selection-end-line="1561" selection-end-column="15" />
-          <folding>
-            <element signature="e#60464#64806#0" />
-            <element signature="e#65349#65627#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/random.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1326">
-          <caret line="86" column="8" selection-start-line="86" selection-start-column="8" selection-end-line="86" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -313,9 +415,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="42" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -339,36 +438,6 @@
     <entry file="file://$PROJECT_DIR$/test/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/node.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-            <marker date="1534897311349" expanded="true" signature="103:108" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/unittest/case.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1607">
-          <caret line="340" column="6" selection-start-line="340" selection-start-column="6" selection-end-line="340" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/network.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="62" column="12" lean-forward="true" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <marker date="1535578512555" expanded="true" signature="113:118" ph="..." />
-            <marker date="1535578512555" expanded="true" signature="2314:2365" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/mock/mock.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -376,10 +445,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fake_network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="758">
+          <caret line="45" column="16" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="17" />
+          <folding>
+            <marker date="1535518781092" expanded="true" signature="1046:1051" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/role.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-248">
-          <caret line="371" column="8" selection-start-line="371" selection-start-column="8" selection-end-line="371" selection-end-column="8" />
+        <state relative-caret-position="168">
+          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
           <folding>
             <element signature="e#0#127#0" expanded="true" />
             <marker date="1535507643204" expanded="true" signature="344:349" ph="..." />
@@ -390,34 +476,65 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="432">
+          <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
             <marker date="1535575760853" expanded="true" signature="125:126" ph="..." />
+            <marker date="1535575760853" expanded="true" signature="429:434" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test_seed.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="29" column="10" lean-forward="true" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
+        <state>
+          <caret column="22" selection-start-column="22" selection-end-column="22" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
-            <marker date="1535579062880" expanded="true" signature="154:155" ph="..." />
-            <marker date="1535579062880" expanded="true" signature="154:160" ph="..." />
+            <marker date="1536461991837" expanded="true" signature="157:158" ph="..." />
+            <marker date="1536461991837" expanded="true" signature="157:163" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/fake_network.py">
+    <entry file="file://$PROJECT_DIR$/node.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="45" column="22" lean-forward="true" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
+        <state relative-caret-position="510">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding>
-            <element signature="e#1#22#0" expanded="true" />
-            <marker date="1535518781092" expanded="true" signature="1046:1051" ph="..." />
+            <element signature="e#0#16#0" expanded="true" />
+            <marker date="1534897311349" expanded="true" signature="103:108" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/random.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="86" column="8" selection-start-line="86" selection-start-column="8" selection-end-line="86" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="901">
+          <caret line="41" column="31" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <marker date="1536516978926" expanded="true" signature="113:118" ph="..." />
+            <marker date="1536516978926" expanded="true" signature="2314:2365" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test_network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1536477391004" expanded="true" signature="126:131" ph="..." />
+            <marker date="1536477391004" expanded="true" signature="277:278" ph="..." />
           </folding>
         </state>
       </provider>

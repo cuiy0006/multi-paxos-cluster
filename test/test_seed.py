@@ -1,4 +1,4 @@
-from . import utils
+from test import utils
 import mock
 from role import Bootstrap, Seed, Join, Welcome
 from common import JOIN_RETRANSMIT
