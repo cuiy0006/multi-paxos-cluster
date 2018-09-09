@@ -10,7 +10,7 @@ class TestComp(Role):
 
     def do_Join(self, sender):
         self.join_called = True
-        # self.kill()
+        self.kill()
 
 
 class NetworkTests(unittest.TestCase):
@@ -32,7 +32,26 @@ class NetworkTests(unittest.TestCase):
         self.assertTrue(comp.join_called)
 
     def test_timeout(self):
-        pass
+        """Node's timeouts trigger at the appropriate time"""
+        node = self.network.new_node('T')
+        cb = mock.Mock(side_effect=lambda: self.kill(node))
+        self.network.set_timer(node.address, 0.01, cb)
+        self.network.run()
+        self.assertTrue(cb.called)
 
     def test_cancel_timeout(self):
-        pass
+        """Node's timeouts do not occur if they are cancelled"""
+        node = self.network.new_node('C')
+
+        def fail():
+            raise RuntimeError("cancelled timer is called")
+
+        cancelled_timer = self.network.set_timer(node.address, 0.01, fail)
+
+        cb = mock.Mock(side_effect=lambda: self.kill(node))
+        self.network.set_timer(node.address, 0.02, cb)
+
+        cancelled_timer.cancel()
+        self.network.run()
+        self.assertTrue(cb.called)
+
