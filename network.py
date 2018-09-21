@@ -10,7 +10,7 @@ class Network(object):
     DROP_PROB = 0.05
 
     def __init__(self, seed):
-        self.nodes = {}
+        self.nodes = {}  # address : node
         self.rnd = random.Random(seed)
         self.timers = []
         self.now = 1000.0

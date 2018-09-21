@@ -43,8 +43,4 @@ class Tests(utils.ComponentTestCase):
         self.Bootstrap().start.assert_called()
 
 
-if __name__ == "__main__":
-    t = Tests()
-    t.setUp()
-    t.test_JOIN()
 
